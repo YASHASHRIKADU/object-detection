@@ -1,0 +1,381 @@
+:root {
+    --bg-main: #ffffff;
+    --primary-navy: #f2c4cd; /* Pink used for buttons */
+    --accent-navy: #f0b0bd; /* Slightly darker pink for hover */
+    --card-light: #051f45; /* Dark navy for cards */
+    --text-main: #111827; /* Dark text for light backgrounds */
+    --text-light: #ffffff; /* Light text for dark backgrounds */
+    --text-muted: #9ca3af; /* Lighter muted text for dark backgrounds */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.navbar-glass {
+    background-color: var(--bg-main);
+    border-bottom: 1px solid rgba(33, 40, 66, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: #051f45 !important;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    font-size: 1.25rem;
+}
+
+/* User Avatar */
+.nav-user {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary-navy);
+    color: #051f45; /* Updated symbol color to requested dark navy */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(33, 40, 66, 0.2);
+}
+
+.logout-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: rgba(33, 40, 66, 0.05);
+}
+
+.logout-link:hover {
+    background: rgba(33, 40, 66, 0.1);
+}
+
+.logout-icon {
+    color: #051f45; /* Updated symbol color to requested dark navy */
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    width: 100%;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.welcome-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #051f45; /* Changed to requested navy */
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.welcome-subtitle {
+    color: #4b5563; /* A slate/dark grey color to complement the dark navy */
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* Cards */
+.main-action-cards {
+    perspective: 1000px;
+}
+
+.action-card {
+    background: var(--card-light);
+    border: none;
+    border-radius: 16px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-light);
+}
+
+.action-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon-wrapper {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto;
+    transition: transform 0.4s ease;
+}
+
+.action-card:hover .card-icon-wrapper {
+    transform: scale(1.1);
+}
+
+.icon-camera, .icon-chart, .icon-account {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-navy); /* Which is pink now */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Buttons */
+.btn-dashboard {
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-dashboard:hover {
+    transform: translateY(-2px);
+}
+
+.btn-start, .btn-table, .btn-logout {
+    background: var(--primary-navy);
+    color: #111827 !important; /* Dark text for pink buttons */
+    box-shadow: 0 4px 15px rgba(242, 196, 205, 0.2);
+}
+
+.btn-start:hover, .btn-table:hover, .btn-logout:hover {
+    box-shadow: 0 8px 25px rgba(242, 196, 205, 0.4);
+    background: var(--accent-navy);
+}
+
+/* =========================================
+   LOGIN & REGISTER PAGE STYLES
+   ========================================= */
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+    position: relative;
+    padding: 2rem 1rem;
+    overflow: hidden;
+}
+
+.login-container {
+    background: var(--card-light);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.register-container {
+    max-width: 520px;
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-light); /* Since background is dark navy */
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Form Styles */
+.form-label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    display: block;
+}
+
+.input-icon-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    opacity: 0.7;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    z-index: 2;
+}
+
+.glass-input {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0.85rem 1rem 0.85rem 2.8rem;
+    font-size: 1rem;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.glass-input::placeholder {
+    color: #9ca3af;
+}
+
+.glass-input:focus {
+    background: #ffffff;
+    border-color: var(--primary-navy);
+    box-shadow: 0 0 0 4px rgba(33, 40, 66, 0.1);
+    outline: none;
+}
+
+/* Change icon color on input focus */
+.glass-input:focus + *, .input-icon-wrapper:focus-within .input-icon {
+    color: var(--primary-navy);
+    opacity: 1;
+}
+
+/* Primary Form Button */
+.btn-primary-gradient {
+    background: var(--primary-navy);
+    color: #111827; /* Dark text for pink buttons */
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(242, 196, 205, 0.2);
+    position: relative;
+    z-index: 1;
+    margin-top: 1rem;
+}
+
+.btn-primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(242, 196, 205, 0.4);
+    background: var(--accent-navy);
+    color: #111827;
+}
+
+/* Secondary Link */
+.accent-link {
+    color: var(--primary-navy);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin-left: 0.25rem;
+}
+
+.accent-link:hover {
+    color: var(--accent-navy);
+    text-decoration: underline;
+}
+
+/* Password Toggle */
+.pr-5 {
+    padding-right: 2.8rem !important;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    z-index: 3;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+    color: var(--primary-navy);
+}
+
+/* Progress bar transitions for Password Strength */
+.progress-bar {
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .welcome-title {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-container {
+        padding: 2.5rem 1.5rem;
+    }
+}
