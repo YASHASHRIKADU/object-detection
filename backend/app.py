@@ -12,10 +12,25 @@ from ultralytics import YOLO
 load_dotenv()
 
 app = Flask(__name__)
-# Enable CORS for all domains so Vercel frontend can access it
-CORS(app, supports_credentials=True, origins="*")
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback_secret_key_if_env_missing")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback_secret_key")
 DB = "database.db"
+
+# ---------------------------------------------------------------------------
+# CORS — must be after app creation.
+# IMPORTANT: supports_credentials=True is INCOMPATIBLE with origins="*".
+# Browsers will block the preflight (OPTIONS) request if both are set.
+# Since the frontend uses localStorage (no cookies), we don't need credentials.
+# ---------------------------------------------------------------------------
+CORS(app, origins="*", methods=["GET", "POST", "OPTIONS"],
+     allow_headers=["Content-Type", "Authorization"])
+
+@app.after_request
+def add_cors_headers(response):
+    """Ensure every response — including preflight — has the right CORS headers."""
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 # Load YOLO model once at startup
 model = YOLO("yolov8n.pt")
@@ -49,7 +64,16 @@ def init_db():
 
 init_db()
 
-@app.route('/api/login', methods=['POST'])
+# ---------------------------------------------------------------------------
+# Health / wake-up endpoint (called by frontend on page load to warm Render)
+# ---------------------------------------------------------------------------
+@app.route('/health', methods=['GET', 'OPTIONS'])
+@app.route('/api/health', methods=['GET', 'OPTIONS'])
+def health_check():
+    return jsonify({"status": "ok"})
+
+
+@app.route('/api/login', methods=['POST', 'OPTIONS'])
 def login_post():
     data = request.json
     email = data.get('email')
@@ -66,7 +90,7 @@ def login_post():
     else:
         return jsonify({"success": False, "message": "Invalid Login"}), 401
 
-@app.route('/api/register', methods=['POST'])
+@app.route('/api/register', methods=['POST', 'OPTIONS'])
 def register():
     data = request.json
     name = data.get('name')
@@ -85,7 +109,7 @@ def register():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
-@app.route('/api/predictions', methods=['GET'])
+@app.route('/api/predictions', methods=['GET', 'OPTIONS'])
 def view_predictions():
     con = get_db()
     cur = con.cursor()

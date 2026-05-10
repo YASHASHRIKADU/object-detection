@@ -1,4 +1,5 @@
-const API_URL = "https://object-detection-and-recognition.onrender.com"; // Change this to your Render URL in production (e.g., https://your-app.onrender.com/api)
+/* Production API — Render backend */
+const API_URL = "https://object-detection-and-recognition.onrender.com/api";
 
 // State
 let currentUser = null;
@@ -9,6 +10,9 @@ let lastSpokenTime = 0;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    // Ping backend to wake it from Render free-tier cold start
+    fetch(`${API_URL}/health`).catch(() => {});
+
     // Check if logged in
     const storedUser = localStorage.getItem('user_name');
     if (storedUser) {
@@ -57,7 +61,7 @@ async function handleLogin(e) {
             errorDiv.classList.remove('d-none');
         }
     } catch (err) {
-        errorDiv.innerText = "Failed to connect to API.";
+        errorDiv.innerText = "Server is waking up — please wait 30 seconds and try again.";
         errorDiv.classList.remove('d-none');
     }
 }
@@ -85,7 +89,7 @@ async function handleRegister(e) {
             errorDiv.classList.remove('d-none');
         }
     } catch (err) {
-        errorDiv.innerText = "Failed to connect to API.";
+        errorDiv.innerText = "Server is waking up — please wait 30 seconds and try again.";
         errorDiv.classList.remove('d-none');
     }
 }
