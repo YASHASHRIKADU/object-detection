@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api"; // Change this to your Render URL in production (e.g., https://your-app.onrender.com/api)
+const API_URL = "https://object-detection-and-recognition.onrender.com"; // Change this to your Render URL in production (e.g., https://your-app.onrender.com/api)
 
 // State
 let currentUser = null;
